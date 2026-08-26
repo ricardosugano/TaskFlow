@@ -1,34 +1,41 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
 
-
 export default function Home() {
+    function iniciarAplicacao(){
+        console.log("o botão foi pressionado")
+    }
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <View style={styles.container}>
-                <Image 
-                    source={require('./assets/logo.png')} 
-                    style={styles.image} 
-                    resizeMode='contain'
-                    
-                />
-                
-                <Text style={styles.titulo}>TaskFlow</Text>
+                <View style={styles.card}>
 
-                <Text>TaskFlow</Text>
+                    <Image
+                        source={require('../assets/images/logo.png')}
+                        style={styles.image}
+                        resizeMode="contain"
+                    />
 
-                <Text>Organize suas tarefas de forma eficiente</Text>
+                    <Text style={styles.titulo}>
+                        TaskFlow
+                    </Text>
+
+                    <Text style={styles.subtitulo}>
+                        Organize suas tarefas de forma eficiente
+                    </Text>
+
+                    <Pressable 
+                    onPress={iniciarAplicacao} style={({pressed})} => [styles.botao, pressed </View>
+                    >
+                        <Text style={styles.textoBotao}>
+                            Começar
+                        </Text>
+                    </Pressable>
+
+                </View>
             </View>
         </SafeAreaView>
     );
-}   
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        borderColor: 'black',
-        borderWidth: 1,
-    }
-});
+}
