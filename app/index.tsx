@@ -1,90 +1,61 @@
-import { Image, Pressable, Text, View } from 'react-native';
+import { Image, Pressable, Text, View, Button } from 'react-native';
+import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { styles } from './styles';
-import { useState } from 'react';
+import { router } from 'expo-router';
 
 export default function Home() {
+    const [iniciado, setIniciado] = useState(false)
 
-    // Estado que controla se a aplicação foi iniciada
-    const [iniciado, setIniciado] = useState(false);
-
-    // Estado que controla o modo claro ou escuro
-    const [modo, setModo] = useState<'claro' | 'escuro'>('claro');
-
-    // Função para iniciar a aplicação
     function iniciarAplicacao() {
         setIniciado(true);
-        setModo('escuro');
+        router.push('/tarefas');
     }
-
-    // Função para encerrar a aplicação
-    function encerrarAplicacao() {
-        setIniciado(false);
-        setModo('claro');
-    }
-
-    // Função para alternar entre claro e escuro
-    function alternarModo() {
-        setModo((modoAtual) =>
-            modoAtual === 'claro' ? 'escuro' : 'claro'
-        );
-    }
-
     return (
         <SafeAreaView style={styles.safeArea}>
             <View style={styles.container}>
-
                 <View style={styles.card}>
-
                     <Image
                         source={require("../assets/images/logo.png")}
                         style={styles.logo}
-                        resizeMode="contain"
+                        resizeMode='contain'
                     />
-
-                    <Text style={styles.titulo}>
-                        Tarefas
-                    </Text>
+                    <Text style={styles.titulo}>TaskFlow</Text>
 
                     {iniciado ? (
                         <Text style={styles.descricao}>
-                            Bem-vindo ao TaskFlow!
+                            Bem vindo as TaskFlow!
                         </Text>
                     ) : (
                         <Text style={styles.descricao}>
-                            Bem-vindo de volta ao TaskFlow!
+                            Organize sua tarefas de forma simples
                         </Text>
                     )}
 
+                 
                     <Pressable
                         onPress={iniciarAplicacao}
-                        style={({ pressed }) => [
-                            styles.botao,
-                            pressed && styles.botaoPressionado
+                        style={({ pressed }) => [styles.botao,
+                        pressed && styles.botaoPressionado
                         ]}
                     >
+
                         <Text style={styles.textoBotao}>
                             {iniciado ? "Continuar" : "Começar"}
                         </Text>
-                    </Pressable>
 
-                    {iniciado && (
-                        <Pressable
-                            onPress={encerrarAplicacao}
-                            style={({ pressed }) => [
-                                styles.botao,
-                                pressed && styles.botaoPressionado
-                            ]}
-                        >
-                            <Text style={styles.textoBotao}>
-                                Encerrar
-                            </Text>
-                        </Pressable>
-                    )}
+
+                    </Pressable>
+                    <Button
+                        title="Configurações"
+                        onPress={() => router.push('/configuracoes')}
+                    >
+
+                    </Button>
 
                 </View>
-
             </View>
         </SafeAreaView>
     );
-};
+}
+
