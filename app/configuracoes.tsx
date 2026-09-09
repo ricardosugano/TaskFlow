@@ -10,6 +10,11 @@ export default function Configuracoes() {
                 title="Voltar"
                 onPress={() => router.back()}
             />
+            <Button
+                title="Tarefas"
+                onPress={() => router.push('/tarefas')}
+            />
+
         </View>
     );
 }

@@ -3,12 +3,23 @@ import { styles } from "./styles";
 import { router } from "expo-router";
 
 export default function Tarefas() {
+    function voltarInicio() {
+        router.back();
+    }
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>Minhas Tarefas</Text>
             <Button
                 title="Voltar"
                 onPress={() => router.back()}
+            />
+            <Button
+                title="Configurações"
+                onPress={() => router.push('/configuracoes')}
+            />
+            <Button
+                title="INICIO"
+                onPress={voltarInicio}
             />
         </View>
     );
