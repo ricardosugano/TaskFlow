@@ -1,12 +1,18 @@
-import { Stack } from "expo-router";
+import {Stack} from 'expo-router'
 
-export default function Layout() {
-  return (
-    <Stack>
-      <Stack.Screen name="index" 
-        options={{ title: "TaskFlow" }} />
-      <Stack.Screen name="tarefas" 
-        options={{ title: "Minhas Tarefas" }} />  
-    </Stack>
-  );
-}  
+export default function Layout(){
+
+    return(
+        <Stack>
+            <Stack.Screen
+            name="index"
+            options={{title: "TaskFlow"}}
+            />
+
+            <Stack.Screen
+            name="tarefas"
+            options={{title: "Minhas Tarefas"}}
+            />
+        </Stack>
+    )
+}
