@@ -1,17 +1,15 @@
 import api from "./api";
 
 export async function listarTarefas() {
-    const response = await api.get('/tarefas');
-    return response.data;
-}   
-
-export async function criarTarefa(id: string) {
-    const response = await api.post(`/tarefas/${id}`);
-    return response.data;
+    const resposta = await api.get('/tarefas');
+    return resposta.data;
 }
 
-export default function excluirTarefa(id: string) {
-    await api.delete(`/tarefas/${id}`);
-    return true;
+export async function criarTarefas(tarefa:any) {
+    const resposta = await api.post('/tarefas', tarefa);
+    return resposta.data;
+}
 
+export async function excluirTarefa(id: string){
+    await api.delete(`/tarefas/${id}`);
 }
