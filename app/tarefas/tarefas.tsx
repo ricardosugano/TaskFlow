@@ -1,7 +1,7 @@
 import Botao from "@/components/Botao";
 import TarefaCard from "@/components/TarefaCard";
 import { router } from "expo-router";
-import { FlatList, SectionList, Text, View } from "react-native";
+import { Alert, FlatList, SectionList, Text, View } from "react-native";
 import { styles } from "@/styles/global";
 import { carregarTarefas, carregarUsuario } from "@/utils/armazenamento";
 import { useEffect, useState } from "react";
@@ -23,6 +23,25 @@ export default function Tarefas() {
 
     const [tarefas, setTarefas] = useState<Tarefa[]>([])
     const [usuario, setUsuario] = useState<Usuario | null>(null)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    async function excluir(id: string) {
+        Alert.alert(
+            "Excluir", "Tem certeza que deseja excluir esta tarefa?",
+            [
+                { 
+                    text: "Cancelar",
+                    style: "cancel"},
+                { 
+                    text: "Excluir",
+                    style: "destructive",
+                    onPress: async() =>{
+                        await api.delete(`/tarefas/${id}`);
+                        console.log("Tarefa excluída!");
+                    } }
+        ])
+    }   
 
     useEffect(()=>{
         async function carregar() {
