@@ -5,12 +5,14 @@ import { FlatList, SectionList, Text, View } from "react-native";
 import { styles } from "@/styles/global";
 import { carregarTarefas, carregarUsuario } from "@/utils/armazenamento";
 import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 type Tarefa = {
-    id: string;
+    _id: string;
     titulo: string;
     descricao: string;
     prioridade: string;
+    concluida: boolean;
 }
 
 type Usuario = {
@@ -24,7 +26,7 @@ export default function Tarefas() {
 
     useEffect(()=>{
         async function carregar() {
-            const dados = await carregarTarefas();
+            const dados = await api.get('/tarefas')
             const user = await carregarUsuario();
             setTarefas(dados);
             setUsuario(user);
