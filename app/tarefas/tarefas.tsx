@@ -33,14 +33,20 @@ export default function Tarefas() {
                 { 
                     text: "Cancelar",
                     style: "cancel"},
-                { 
+                {
+
+                },
                     text: "Excluir",
                     style: "destructive",
                     onPress: async() =>{
-                        await api.delete(`/tarefas/${id}`);
-                        console.log("Tarefa excluída!");
-                    } }
-        ])
+                        try
+                            await api.delete(`/tarefas/${id}`);
+                            console.log("Tarefa excluída!");
+                        } catch (error) {
+                            Alert.alert("Erro", "Não foi possível excluir a tarefa.");
+                }
+        ]
+    )
     }   
 
     useEffect(()=>{
